@@ -1,0 +1,98 @@
+/* Reset some default styles */
+body, h1, p, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .site-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .auth-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  .auth-link:hover {
+    color: #0056b3;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .welcome-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .welcome-box h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-box p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  .get-started-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .get-started-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  

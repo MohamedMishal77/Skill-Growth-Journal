@@ -1,0 +1,112 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: #222;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .site-name {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  .home-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  .home-link:hover {
+    text-decoration: underline;
+  }
+  
+  .auth-container {
+    max-width: 450px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+  }
+  
+  .form-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-toggle button {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #222;
+    transition: background 0.3s ease;
+  }
+  
+  .form-toggle button.active {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-form h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #222;
+  }
+  
+  .auth-form input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .auth-form button {
+    padding: 0.75rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .auth-form button:hover {
+    background-color: #2980b9;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.9rem;
+  color: #666;
+}

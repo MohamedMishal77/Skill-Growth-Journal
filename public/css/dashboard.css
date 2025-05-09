@@ -1,0 +1,379 @@
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  
+}
+
+
+header {
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+header .header-right {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007bff;
+}
+header .header-left {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+header form button {
+  padding: 8px 16px;
+  background-color: #639be4; /* Tomato color */
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 6px;
+  margin-left: 20px;
+  transition: background-color 0.3s;
+}
+
+header form button:hover {
+  background-color: #e55347; /* Darker tomato color */
+}
+
+
+
+/* Main Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;  
+  
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  padding: 20px;
+  
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 30px;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar form input[type="text"] {
+  width: 90%;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.sidebar form button {
+  width: 98.5%;
+  padding: 12px;
+  background-color:  #639be4;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
+.sidebar .b{
+  background-color:  transparent;
+  color :#333;
+  font-size: 14px;
+  padding: 10px;
+}
+.sidebar .c{
+  background-color:  transparent;
+  color :#333;
+  font-size: 14px;
+  border-radius: 7px;
+  padding: 10px;
+}
+.sidebar .c:hover {
+  background-color: #c1bebe;
+}
+.sidebar .b:hover {
+  background-color: #c1bebe;
+}
+.sidebar form button:hover {
+  background-color: #45a049;
+}
+
+/* Log Area */
+
+.log-area {
+  flex-grow: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.log-area h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.log-area form {
+  margin-top: 20px;
+}
+
+.log-area select,
+.log-area textarea {
+  width: 90%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.log-area select {
+  background-color: #fafafa;
+}
+
+.log-area textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.log-area button {
+  padding: 12px 20px;
+  background-color: #639be4;;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 7px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.log-area button:hover {
+  background-color: #45a049;
+}
+
+.log-area ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.log-area li {
+  padding: 12px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.log-area li small {
+  font-size: 12px;
+  color: #999;
+}
+
+.log-area li p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.log-content p {
+  word-wrap: break-word;         /* Ensures long words wrap */
+  overflow-wrap: break-word;     /* Modern equivalent */
+  white-space: pre-wrap;         /* Preserves line breaks and wraps text */
+  max-width: 100%;               /* Avoids exceeding container */
+}
+
+
+.skill-item {
+  position: relative;
+  padding: 5px;
+}
+
+.skill-item:hover .menu-btn {
+  visibility: visible;
+}
+
+.menu-btn {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  visibility: hidden;
+  
+}
+
+.context-menu {
+  display: none;
+  position: absolute;
+  margin-top: 16px;
+  top: 25px;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 100;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.context-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.context-menu button:hover {
+  background-color: #c1bebe;;
+}
+.rename-form {
+  margin-top: 5px;
+}
+.logs-list {
+  list-style: none;
+  padding: 0;
+}
+
+.log-item {
+  position: relative;
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.log-item:hover .menu-btn {
+  visibility: visible;
+}
+
+.log-content {
+  margin-bottom: 5px;
+}
+
+.edit-log-form {
+  margin-top: 5px;
+}
+
+.edit-log-form button{
+  margin-top: 8px;
+  border-radius: 7px;
+}
+
+.menu-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.context-menu {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  background: rgb(246, 243, 243);
+  border: 1px solid #979696;
+  
+  border-radius: 5px;
+  z-index: 100;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.context-menu button {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color:#333;
+  padding: 5px 10px;
+  text-align: left;
+  cursor: pointer;
+}
+/* Add to dashboard.css or the relevant stylesheet */
+.random-quote {
+  background-color: #f4f4f9;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #333;
+  border-radius: 8px;
+}
+
+.random-quote blockquote {
+  margin: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+
+
+
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+}

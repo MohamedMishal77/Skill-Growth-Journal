@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Skill Growth Journal</h1>
+    </div>
+    <div class="header-right">
+      <span>Welcome, <%= user.username %> </span>
+      <form action="/logout" method="POST" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Layout -->
+  <div class="dashboard-container">
+
+    <!-- Sidebar with Skills -->
+    <aside class="sidebar">
+      <h2>MY SKILLS</h2>
+      <ul>
+        <% if (skills.length > 0) { %>
+          <% skills.forEach(skill => { %>
+            <li class="skill-item" data-skill-id="<%= skill.skill_id %>">
+              <span><%= skill.skill_name %></span>
+              <button class="menu-btn" onclick="toggleMenu(event, '<%= skill.skill_id %>')">⋮</button>
+      
+              <div class="context-menu" id="menu-<%= skill.skill_id %>">
+                <button class="c" onclick="showRenameForm('<%= skill.skill_id %>')">Rename</button>
+                <form action="/skill/delete/<%= skill.skill_id %>" method="POST" >
+            
+                  <button class ="b" type="submit">Delete</button>
+                </form>
+              </div>
+      
+              <!-- Rename Form (Initially Hidden) -->
+              <form class="rename-form" id="rename-form-<%= skill.skill_id %>" action="/skill/edit/<%= skill.skill_id %>" method="POST" style="display:none ;">
+                <input type="text" name="newName" placeholder="New name" required />
+              </br>
+            </br>
+                <button type="submit">Done</button>
+              </form>
+            </li>
+          <% }) %>
+        <% } else { %>
+          <li>No skills added yet.</li>
+        <% } %>
+      </ul>
+      
+
+      <!-- Add Skill Form -->
+      <form action="/add-skill" method="POST">
+        <input type="hidden" name="user_id" value="<%= user.id %>">
+        <input type="text" name="skill" placeholder="Enter a skill" required />
+        <br><br>
+        <button type="submit">+ Add Skill</button>
+      </form>
+    </aside>
+
+    <!-- Logging Section -->
+    <main class="log-area">
+      <div class="random-quote">
+        <blockquote id="random-quote"></blockquote>
+      </div>
+      <h2>Track Today’s Growth</h2>
+
+      <!-- Skill Selector -->
+      <form id="skillForm" method="GET" action="/dashboard">
+        <select name="skill_id" onchange="document.getElementById('skillForm').submit()">
+          <option disabled selected>-- Choose a skill --</option>
+          <% skills.forEach(skill => { %>
+            <option value="<%= skill.skill_id %>" <%= parseInt(skill.skill_id) === parseInt(selectedSkillId) ? 'selected' : '' %>>
+              <%= skill.skill_name %>
+            </option>
+          <% }) %>
+        </select>
+      </form>
+      <% if (typeof selectedSkillId !== 'undefined' && selectedSkillId) { %>
+
+        <!-- Logs for Selected Skill (above input) -->
+        <ul class="logs-list">
+          <% (logs || []).filter(log => log.skill_id == selectedSkillId).forEach(log => { %>
+            <li class="log-item" data-log-id="<%= log.log_id %>">
+              <div class="log-content">
+                <p><%= log.content %></p>
+                <small>(<%= new Date(log.created_at).toLocaleString() %>)</small>
+              </div>
+              <button class="menu-btn" onclick="toggleLogMenu(event, '<%= log.log_id %>')">⋮</button>
+      
+              <div class="context-menu" id="log-menu-<%= log.log_id %>" style="display: none;">
+                <button onclick="showLogEditForm('<%= log.log_id %>')">Edit</button>
+                <form action="/log/delete/<%= log.log_id %>" method="POST" style="display:inline;">
+                  <input type="hidden" name="skill_id" value="<%= selectedSkillId %>">
+                  <button type="submit"> Delete </button>
+                </form>
+              </div>
+      
+              <!-- Edit Log Form (Initially Hidden) -->
+              <form class="edit-log-form" id="log-edit-form-<%= log.log_id %>" action="/log/edit/<%= log.log_id %>" method="POST" style="display:none;">
+                <input type="hidden" name="skill_id" value="<%= selectedSkillId %>">
+                <textarea name="newContent" rows="2" cols="50" required><%= log.content %></textarea>
+                <button type="submit">✔️</button>
+              </form>
+              
+            </li>
+          <% }) %>
+        </ul>
+      
+      
+      
+        
+        <!-- Add New Log Form (below logs) -->
+        <form action="/add-log" method="POST">
+          <input type="hidden" name="skill_id" value="<%= selectedSkillId %>">
+          <textarea name="content" rows="3" cols="50" placeholder="Write your log here..." required></textarea>
+          <br>
+          <button type="submit">Add Log</button>
+        </form>
+
+      <% } %>
+    </main>
+
+  </div>
+  <script>
+
+const quotes = [
+      "Believe in yourself and all that you are.",
+      "Success is not the key to happiness. Happiness is the key to success.",
+      "Don't watch the clock; do what it does. Keep going.",
+      "The only way to do great work is to love what you do.",
+      "Hardships often prepare ordinary people for an extraordinary destiny."
+    ];
+
+    // Function to select a random quote
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Display the random quote in the element with id 'random-quote'
+    document.getElementById("random-quote").innerHTML = `"${randomQuote}"`;
+
+    function toggleMenu(event, id) {
+      event.stopPropagation();
+      document.querySelectorAll('.context-menu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+      const menu = document.getElementById(`menu-${id}`);
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  
+    function showRenameForm(id) {
+      document.querySelectorAll('.rename-form').forEach(f => f.style.display = 'none');
+      document.getElementById(`rename-form-${id}`).style.display = 'block';
+      document.getElementById(`menu-${id}`).style.display = 'none';
+    }
+  
+    // Close menus when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.context-menu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    });
+    function toggleLogMenu(event, logId) {
+    event.stopPropagation();
+    document.querySelectorAll('.context-menu').forEach(menu => {
+      menu.style.display = 'none';
+    });
+    const menu = document.getElementById(`log-menu-${logId}`);
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function showLogEditForm(logId) {
+    document.querySelectorAll('.edit-log-form').forEach(f => f.style.display = 'none');
+    document.getElementById(`log-edit-form-${logId}`).style.display = 'block';
+    document.getElementById(`log-menu-${logId}`).style.display = 'none';
+  }
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.context-menu').forEach(menu => {
+      menu.style.display = 'none';
+    });
+   
+  });
+  </script>
+  <footer>
+    &copy; <%= new Date().getFullYear() %> Skill Growth Journal. All rights reserved.
+  </footer>
+</body>
+</html>
+

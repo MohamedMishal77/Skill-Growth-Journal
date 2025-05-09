@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Register</title>
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+
+  <header>
+    <div class="site-name">Skill Growth Journal</div>
+    <a class="home-link" href="/">← Back to Home</a>
+  </header>
+
+  <main class="auth-container">
+    <div class="form-toggle">
+      <button id="show-login" class="active">Login</button>
+      <button id="show-register">Register</button>
+    </div>
+
+    <div class="forms">
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form" action="/login" method="POST">
+        <h2>Login</h2>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form hidden" action="/register" method="POST">
+        <h2>Register</h2>
+        <input type="text" name="username" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const loginBtn = document.getElementById("show-login");
+    const registerBtn = document.getElementById("show-register");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+
+    loginBtn.addEventListener("click", () => {
+      loginForm.classList.remove("hidden");
+      registerForm.classList.add("hidden");
+      loginBtn.classList.add("active");
+      registerBtn.classList.remove("active");
+    });
+
+    registerBtn.addEventListener("click", () => {
+      registerForm.classList.remove("hidden");
+      loginForm.classList.add("hidden");
+      registerBtn.classList.add("active");
+      loginBtn.classList.remove("active");
+    });
+  </script>
+
+</br>
+</br>
+</br>
+</br>
+
+
+
+  <footer class="footer">
+    <p>&copy; <%= new Date().getFullYear() %> Skill Growth Journal. All rights reserved.</p>
+    
+  </footer>
+  
+
+</body>
+
+
+
+</html>
