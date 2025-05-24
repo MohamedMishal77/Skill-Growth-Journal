@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  
   <header class="header">
     <div class="header-left">
       <h1>Skill Growth Journal</h1>
@@ -20,10 +20,10 @@
     </div>
   </header>
 
-  <!-- Main Dashboard Layout -->
+  
   <div class="dashboard-container">
 
-    <!-- Sidebar with Skills -->
+    
     <aside class="sidebar">
       <h2>MY SKILLS</h2>
       <ul>
@@ -41,7 +41,7 @@
                 </form>
               </div>
       
-              <!-- Rename Form (Initially Hidden) -->
+          
               <form class="rename-form" id="rename-form-<%= skill.skill_id %>" action="/skill/edit/<%= skill.skill_id %>" method="POST" style="display:none ;">
                 <input type="text" name="newName" placeholder="New name" required />
               </br>
@@ -56,7 +56,7 @@
       </ul>
       
 
-      <!-- Add Skill Form -->
+      
       <form action="/add-skill" method="POST">
         <input type="hidden" name="user_id" value="<%= user.id %>">
         <input type="text" name="skill" placeholder="Enter a skill" required />
@@ -65,14 +65,14 @@
       </form>
     </aside>
 
-    <!-- Logging Section -->
+    
     <main class="log-area">
       <div class="random-quote">
         <blockquote id="random-quote"></blockquote>
       </div>
       <h2>Track Today’s Growth</h2>
 
-      <!-- Skill Selector -->
+      
       <form id="skillForm" method="GET" action="/dashboard">
         <select name="skill_id" onchange="document.getElementById('skillForm').submit()">
           <option disabled selected>-- Choose a skill --</option>
@@ -85,7 +85,7 @@
       </form>
       <% if (typeof selectedSkillId !== 'undefined' && selectedSkillId) { %>
 
-        <!-- Logs for Selected Skill (above input) -->
+        
         <ul class="logs-list">
           <% (logs || []).filter(log => log.skill_id == selectedSkillId).forEach(log => { %>
             <li class="log-item" data-log-id="<%= log.log_id %>">
@@ -103,7 +103,7 @@
                 </form>
               </div>
       
-              <!-- Edit Log Form (Initially Hidden) -->
+            
               <form class="edit-log-form" id="log-edit-form-<%= log.log_id %>" action="/log/edit/<%= log.log_id %>" method="POST" style="display:none;">
                 <input type="hidden" name="skill_id" value="<%= selectedSkillId %>">
                 <textarea name="newContent" rows="2" cols="50" required><%= log.content %></textarea>
@@ -117,7 +117,7 @@
       
       
         
-        <!-- Add New Log Form (below logs) -->
+        
         <form action="/add-log" method="POST">
           <input type="hidden" name="skill_id" value="<%= selectedSkillId %>">
           <textarea name="content" rows="3" cols="50" placeholder="Write your log here..." required></textarea>
@@ -139,10 +139,10 @@ const quotes = [
       "Hardships often prepare ordinary people for an extraordinary destiny."
     ];
 
-    // Function to select a random quote
+    
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
-    // Display the random quote in the element with id 'random-quote'
+    
     document.getElementById("random-quote").innerHTML = `"${randomQuote}"`;
 
     function toggleMenu(event, id) {
@@ -160,7 +160,7 @@ const quotes = [
       document.getElementById(`menu-${id}`).style.display = 'none';
     }
   
-    // Close menus when clicking outside
+    
     document.addEventListener('click', () => {
       document.querySelectorAll('.context-menu').forEach(menu => {
         menu.style.display = 'none';

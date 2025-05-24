@@ -21,17 +21,17 @@
 
     <div class="forms">
       <!-- Login Form -->
-      <form id="login-form" class="auth-form" action="/login" method="POST">
+      <form id="login-form" class="auth-form" action="/login" method="POST" autocomplete="off" >
         <h2>Login</h2>
-        <input type="email" name="email" placeholder="Email" required>
+        <input type="email" name="email" placeholder="Email" required autofocus="true">
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
       </form>
 
       <!-- Register Form -->
-      <form id="register-form" class="auth-form hidden" action="/register" method="POST">
+      <form id="register-form" class="auth-form hidden" action="/register" method="POST" autocomplete="off">
         <h2>Register</h2>
-        <input type="text" name="username" placeholder="Full Name" required>
+        <input type="text" name="username" placeholder="Full Name" required autofocus="true">
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Register</button>
