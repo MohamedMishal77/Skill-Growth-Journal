@@ -17,11 +17,12 @@ const db = new pg.Client({
 });
 db.connect();
 
+// Session configuration
 app.use(session({
-  secret: process.env.SESSION_SECRET, // Change this to something more secure
+  secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Set 'secure: true' in production with HTTPS
+  cookie: { secure: true } 
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -80,7 +81,7 @@ app.post("/register", async (req, res) => {
     if (checkResult.rows.length > 0) {
       res.send("Email already exists. Try logging in.");
     } else {
-      // Hash the password before storing it
+      // Hashing the password before storing it
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
           console.error(err);
@@ -90,12 +91,15 @@ app.post("/register", async (req, res) => {
             "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING user_id",
             [userName, email, hash]
           );
-          console.log(result);
+          
 
-          const newUser = result.rows[0]; // user_id will be returned
-          req.session.userId = newUser.user_id;
+          const user = {
+            user_id: result.rows[0].user_id,
+            username: userName // or result.rows[0].username if returned from DB
+          };
+          req.session.userId = user.user_id;
           res.render("dashboard.ejs", {
-            user: newUser,
+            user: user,
             skills: [],
             logs: [],
             selectedSkillId: null
@@ -129,8 +133,8 @@ app.post("/login", async (req, res) => {
         } else {
           // Passwords match
           if (result) {
-            const userId = user.user_id; // Use the correct column name
-            req.session.userId = userId; // Store user_id in session
+            const userId = user.user_id; 
+            req.session.userId = userId; 
 
             const skillResult = await db.query(
               "SELECT * FROM skills WHERE user_id = $1",
@@ -164,28 +168,28 @@ app.post("/login", async (req, res) => {
 
 
 app.post("/add-skill", async (req, res) => {
-  const { skill } = req.body; // No need for userId from body
-  const userId = req.session.userId; // Get userId from session
+  const { skill } = req.body; 
+  const userId = req.session.userId; 
 
   if (!userId) {
     return res.status(401).send("Unauthorized: Please log in first.");
   }
 
   try {
-    // Insert the new skill with the user_id from session
+    
     await db.query(
       "INSERT INTO skills (skill_name, user_id) VALUES ($1, $2)",
       [skill, userId]
     );
 
-    // Fetch the updated skill list for the user
+    
     const skillResult = await db.query(
       "SELECT * FROM skills WHERE user_id = $1",
       [userId]
     );
 
     res.render("dashboard.ejs", {
-      user: { user_id: userId }, // Pass userId to the view
+      user: { user_id: userId }, 
       skills: skillResult.rows,
       logs: [],
       selectedSkillId: null 
@@ -221,7 +225,7 @@ app.post("/add-log", async (req, res) => {
         user: userResult.rows[0],
         skills: skillsResult.rows,
         logs: logsResult.rows,
-        selectedSkillId: parseInt(skill_id) || null, // ✅ Pass this to prevent EJS error
+        selectedSkillId: parseInt(skill_id) || null, 
       });
     } else {
       res.status(400).send("Invalid skill ID or skill not associated with this user.");
@@ -270,15 +274,10 @@ app.post('/log/edit/:id', (req, res) => {
   const { id } = req.params;
   const { newContent,skill_id } = req.body;
 
-  console.log('Log ID:', id);
-  console.log('New Content:', newContent);
-  console.log('Skill ID:', skill_id);
-
-  // Ensure id is an integer and newContent is not empty
+  
   if (isNaN(id) || !newContent) {
     return res.status(400).send('Invalid data');
   }
-
 
   db.query(
     'UPDATE logs SET content = $1 WHERE log_id = $2',
